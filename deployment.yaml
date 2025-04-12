@@ -13,7 +13,7 @@ spec:
         app: flight-price
     spec:
       containers:
-      - name: flight-price-container
-        image: deep0510/flight-price-api  # your Docker Hub image
-        ports:
-        - containerPort: 8000
+        - name: flight-price-container
+          image: deep0510/flight-price-api:latest
+          ports:
+            - containerPort: 8000

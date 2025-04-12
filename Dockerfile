@@ -1,21 +1,20 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9
+# Use Python 3.13 Alpine as the base image
+FROM python:3.13-alpine
 
-# Set the working directory
+# Install build dependencies
+RUN apk add --no-cache build-base
+
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the application files
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the Flask app port
-EXPOSE 8000
+# Expose the Flask app port (assuming port 5000 for Flask)
+EXPOSE 5000
 
-# # Define environment variables for Flask
-# ENV FLASK_APP=Flight_Price.py
-# ENV FLASK_RUN_HOST=0.0.0.0
-
-# Run the application
+# Command to run the Flask app
 CMD ["python", "Flight_Price.py"]
