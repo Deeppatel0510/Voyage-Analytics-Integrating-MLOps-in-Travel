@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-price-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-price
+  template:
+    metadata:
+      labels:
+        app: flight-price
+    spec:
+      containers:
+        - name: flight-price-container
+          image: deep0510/flight-price-api:latest
+          ports:
+            - containerPort: 8000
