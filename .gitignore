@@ -1,0 +1,16 @@
+# Ignore Airflow logs
+**/logs/
+*.log
+
+# Ignore MLflow runs
+**/mlruns/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Ignore large CSV file
+Flight Prediction/airflow-docker/dags/data/X.csv
