@@ -11,3 +11,6 @@
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# Ignore large CSV file
+Flight Prediction/airflow-docker/dags/data/X.csv
