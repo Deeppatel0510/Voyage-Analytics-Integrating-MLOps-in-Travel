@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mlflow
-        image: deep0510/mlflow:latest  # replace with your image if custom built
+        image: mlflow/mlflow:latest  # replace with your image if custom built
         ports:
         - containerPort: 5000
         command: ["mlflow", "server"]
