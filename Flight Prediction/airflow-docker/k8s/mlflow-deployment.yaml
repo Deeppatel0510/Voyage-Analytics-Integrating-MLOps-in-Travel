@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mlflow
-        image: cr.fly.dev/mlflow/mlflow:2.12.1  # replace with your image if custom built
+        image: ghcr.io/mlflow/mlflow:2.12.1  # replace with your image if custom built
         ports:
         - containerPort: 5000
         command: ["mlflow", "server"]
