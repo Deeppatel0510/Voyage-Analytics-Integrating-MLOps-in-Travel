@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mlflow
-        image: sebp/mlflow  # replace with your image if custom built
+        image: mlflow-local:latest  # replace with your image if custom built
         ports:
         - containerPort: 5000
         command: ["mlflow", "server"]

@@ -1,23 +1,35 @@
-name: Build & Push Docker Image to Docker Hub
+name: Build & Deploy to Kubernetes via Argo CD
 
 on:
   push:
     branches:
-      - main  # Trigger only when changes are pushed to the main branch
+      - main
 
 jobs:
   docker:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build Docker Image
-        run: docker build -t deep0510/flight-price-api .
+    - name: Build Docker Image
+      run: docker build -t deep0510/flight-price-api:${{ github.sha }} .
 
-      - name: Push Docker Image
-        run: docker push deep0510/flight-price-api
+    - name: Push Docker Image
+      run: docker push deep0510/flight-price-api:${{ github.sha }}
+
+    - name: Update Kubernetes Manifest
+      run: |
+        sed -i "s|image: .*|image: deep0510/flight-price-api:${{ github.sha }}|" k8s/deployment.yaml
+
+    - name: Commit updated manifest
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add k8s/deployment.yaml
+        git commit -m "Update image tag to ${{ github.sha }}"
+        git push
