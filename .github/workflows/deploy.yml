@@ -17,19 +17,19 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
     - name: Build Docker Image
-      run: docker build -t deep0510/flight-price-api:${{ github.sha }} .
+      run: docker build -t deep0510/flight-price-api:${{ github.sha }} "./Flight Prediction"
 
     - name: Push Docker Image
       run: docker push deep0510/flight-price-api:${{ github.sha }}
 
     - name: Update Kubernetes Manifest
       run: |
-        sed -i "s|image: .*|image: deep0510/flight-price-api:${{ github.sha }}|" k8s/deployment.yaml
+        sed -i "s|image: .*|image: deep0510/flight-price-api:${{ github.sha }}|" "Flight Prediction/k8s/deployment.yaml"
 
     - name: Commit updated manifest
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
-        git add k8s/deployment.yaml
+        git add "Flight Prediction/k8s/deployment.yaml"
         git commit -m "Update image tag to ${{ github.sha }}"
         git push
