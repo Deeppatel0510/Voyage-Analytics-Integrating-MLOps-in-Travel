@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+# ✅ This allows GitHub Actions to push changes back
+permissions:
+  contents: write
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -31,5 +35,5 @@ jobs:
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         git add "Flight Prediction/deployment.yaml"
-        git commit -m "Update image tag to ${{ github.sha }}"
-        git push
+        git commit -m "Update image tag to ${{ github.sha }}" || echo "No changes to commit"
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
