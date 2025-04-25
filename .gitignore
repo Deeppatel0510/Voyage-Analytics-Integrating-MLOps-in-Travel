@@ -12,5 +12,9 @@
 .DS_Store
 Thumbs.db
 
+# Ignore Python bytecode
+**/__pycache__/
+*.pyc
+
 # Ignore large CSV file
 Flight Prediction/airflow-docker/dags/data/X.csv
