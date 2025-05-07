@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: flight-price-container
-          image: deep0510/flight-price-api:4e7330becfe0a4fcbee87d594004cfdc39b684a4
+          image: deep0510/flight-price-api:3c523098f61e57fb4f83585bf8dacb30d8d0e9ad
           ports:
             - containerPort: 8000
